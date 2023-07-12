@@ -1,11 +1,20 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text, TouchableOpacity, Alert} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
+
 import Input from '../input/Input';
 
 const SignUpForm: React.FC = ({}) => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [email, setEmail] = useState<string>('');
+  const [phone, setPhone] = useState<string>('');
+
   const getUsername = (username: string) => {
     setUsername(username);
   };
@@ -14,6 +23,9 @@ const SignUpForm: React.FC = ({}) => {
   };
   const getEmail = (email: string) => {
     setEmail(email);
+  };
+  const getPhone = (phone: string) => {
+    setEmail(phone);
   };
   const CreateAccount = () => {
     Alert.alert('display', `${username + ' ' + password + ' ' + email}`);
@@ -38,6 +50,12 @@ const SignUpForm: React.FC = ({}) => {
         onData={getPassword}
         secureTextEntry={true}
       />
+      <Input
+        placeholder={'Phone Number'}
+        placeholderTextColor={'#fff'}
+        onData={getPhone}
+      />
+
       <TouchableOpacity style={styles.button} onPress={() => CreateAccount()}>
         <Text style={styles.buttonText}>Create</Text>
       </TouchableOpacity>
