@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -6,17 +6,47 @@ import {
   Text,
   ScrollView,
   Dimensions,
+  Animated,
 } from 'react-native';
 import LoginForm from '../../base/login_form/LoginForm';
 import Orientation from 'react-native-orientation-locker';
 
-const {width} = Dimensions.get('window');
 Orientation.lockToPortrait();
 const LoginPage: React.FC = () => {
+  const animatedValue = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    const animation = Animated.loop(
+      Animated.timing(animatedValue, {
+        toValue: 1,
+        duration: 1000,
+        useNativeDriver: true,
+      }),
+    );
+
+    animation.start();
+
+    return () => {
+      animation.stop();
+    };
+  }, []);
+
+  const scale = animatedValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: [1, 1.5],
+  });
+  const opacity = animatedValue.interpolate({
+    inputRange: [0, 0.5, 1],
+    outputRange: [1, 0.5, 1],
+  });
+
   return (
     <View style={styles.container}>
       <View style={styles.avatarContainer}>
-        <Image style={styles.avatar} source={require('./user.png')} />
+        <Animated.Image
+          style={[styles.avatar, {transform: [{scale}], opacity}]}
+          source={require('./login.png')}
+        />
         <Text style={styles.title}>Login</Text>
       </View>
       <LoginForm />
@@ -30,7 +60,7 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#2d416c',
+    backgroundColor: '#2d2c38',
   },
 
   title: {
@@ -38,6 +68,8 @@ const styles = StyleSheet.create({
     color: '#fff',
     marginBottom: 20,
     marginTop: 20,
+    textShadowOffset: {width: 2, height: 2}, // Shadow offset
+    textShadowRadius: 4, // Shadow radius
   },
   avatarContainer: {
     marginTop: 10,
