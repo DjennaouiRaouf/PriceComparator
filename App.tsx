@@ -1,15 +1,8 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React from 'react';
-import LoginPage from './components/pages/login_page/LoginPage';
+import SignUpPage from './components/pages/sign_up_page/SignUpPage';
 
 const App = () => {
-  return <LoginPage />;
+  return <SignUpPage />;
 };
 
 export default App;
