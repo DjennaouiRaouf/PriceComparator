@@ -8,21 +8,18 @@ import {
   Dimensions,
 } from 'react-native';
 import LoginForm from '../../base/login_form/LoginForm';
+import Orientation from 'react-native-orientation-locker';
 
 const {width} = Dimensions.get('window');
+Orientation.lockToPortrait();
 const LoginPage: React.FC = () => {
   return (
     <View style={styles.container}>
-      <ScrollView
-        contentContainerStyle={styles.contentContainer}
-        showsVerticalScrollIndicator={false}
-        showsHorizontalScrollIndicator={false}>
-        <View style={styles.avatarContainer}>
-          <Image style={styles.avatar} source={require('./user.png')} />
-          <Text style={styles.title}>Login</Text>
-        </View>
-        <LoginForm />
-      </ScrollView>
+      <View style={styles.avatarContainer}>
+        <Image style={styles.avatar} source={require('./user.png')} />
+        <Text style={styles.title}>Login</Text>
+      </View>
+      <LoginForm />
     </View>
   );
 };
@@ -35,12 +32,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#2d416c',
   },
-  contentContainer: {
-    flexGrow: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    minWidth: (width * 0.5),
-  },
+
   title: {
     fontSize: 50,
     color: '#fff',
