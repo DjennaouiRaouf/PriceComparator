@@ -11,12 +11,12 @@ import Orientation from 'react-native-orientation-locker';
 import SignUpForm from '../../base/sign_up_form/SignUpForm';
 
 Orientation.lockToPortrait();
-const screenWidth = Dimensions.get('screen').width;
-const screenheight = Dimensions.get('screen').height;
 
 interface SignUpPageProps {
   navigation: any;
 }
+const screenWidth = Dimensions.get('screen').width;
+const screenheight = Dimensions.get('screen').height;
 
 const SignUpPage: React.FC<SignUpPageProps> = ({navigation}) => {
   const animatedValue = useRef(new Animated.Value(0)).current;

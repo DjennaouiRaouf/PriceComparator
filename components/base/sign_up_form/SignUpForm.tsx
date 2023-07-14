@@ -72,20 +72,6 @@ const SignUpForm: React.FC = ({}) => {
         ]}
         onData={getAuth}
       />
-      <SelectOption
-        datas={[
-          {label: 'Disable 2FA', value: 'false'},
-          {label: 'Enable 2FA', value: 'true'},
-        ]}
-        onData={getAuth}
-      />
-      <SelectOption
-        datas={[
-          {label: 'Disable 2FA', value: 'false'},
-          {label: 'Enable 2FA', value: 'true'},
-        ]}
-        onData={getAuth}
-      />
       <TouchableOpacity style={styles.button} onPress={() => CreateAccount()}>
         <Text style={styles.buttonText}>Create</Text>
       </TouchableOpacity>

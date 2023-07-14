@@ -21,7 +21,8 @@ const SelectOption: React.FC<SelectOptionProps> = ({datas, onData}) => {
     <Picker
       style={styles.picker}
       onValueChange={handleValueChange}
-      selectedValue={option}>
+      selectedValue={option}
+      dropdownIconColor="#fff">
       {datas.map((item, index) => (
         <Picker.Item key={index} label={item.label} value={item.value} />
       ))}
