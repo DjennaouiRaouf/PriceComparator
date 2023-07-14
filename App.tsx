@@ -5,6 +5,7 @@ import loginPage from './components/pages/login_page/LoginPage';
 import signUpPage from './components/pages/sign_up_page/SignUpPage';
 
 const Stack = createStackNavigator();
+
 const App = () => {
   return (
     <NavigationContainer>
