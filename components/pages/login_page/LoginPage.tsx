@@ -7,12 +7,19 @@ import {
   ScrollView,
   Dimensions,
   Animated,
+  Alert,
 } from 'react-native';
 import LoginForm from '../../base/login_form/LoginForm';
 import Orientation from 'react-native-orientation-locker';
 
 Orientation.lockToPortrait();
-const LoginPage: React.FC = () => {
+interface LoginPageProps {
+  navigation: any;
+}
+
+const screenWidth = Dimensions.get('screen').width;
+const screenheight = Dimensions.get('screen').height;
+const LoginPage: React.FC<LoginPageProps> = ({navigation}) => {
   const animatedValue = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -40,6 +47,10 @@ const LoginPage: React.FC = () => {
     outputRange: [1, 0.5, 1],
   });
 
+  const signup = () => {
+    navigation.navigate('sign_up');
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.avatarContainer}>
@@ -49,7 +60,7 @@ const LoginPage: React.FC = () => {
         />
         <Text style={styles.title}>Login</Text>
       </View>
-      <LoginForm />
+      <LoginForm onPress={signup} />
     </View>
   );
 };
@@ -57,10 +68,10 @@ const LoginPage: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#2d2c38',
+    width: '100%',
   },
 
   title: {

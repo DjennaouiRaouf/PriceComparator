@@ -5,15 +5,18 @@ import {
   Text,
   TouchableOpacity,
   Alert,
+  ScrollView,
 } from 'react-native';
 
 import Input from '../input/Input';
+import SelectOption from '../select_option/SelectOption';
 
 const SignUpForm: React.FC = ({}) => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
+  const [auth, setAuth] = useState<string>();
 
   const getUsername = (username: string) => {
     setUsername(username);
@@ -25,10 +28,17 @@ const SignUpForm: React.FC = ({}) => {
     setEmail(email);
   };
   const getPhone = (phone: string) => {
-    setEmail(phone);
+    setPhone(phone);
+  };
+
+  const getAuth = (auth: string) => {
+    setAuth(auth);
   };
   const CreateAccount = () => {
-    Alert.alert('display', `${username + ' ' + password + ' ' + email}`);
+    Alert.alert(
+      'display',
+      `${username + ' ' + password + ' ' + email + ' ' + auth}`,
+    );
   };
 
   return (
@@ -55,7 +65,27 @@ const SignUpForm: React.FC = ({}) => {
         placeholderTextColor={'#fff'}
         onData={getPhone}
       />
-
+      <SelectOption
+        datas={[
+          {label: 'Disable 2FA', value: 'false'},
+          {label: 'Enable 2FA', value: 'true'},
+        ]}
+        onData={getAuth}
+      />
+      <SelectOption
+        datas={[
+          {label: 'Disable 2FA', value: 'false'},
+          {label: 'Enable 2FA', value: 'true'},
+        ]}
+        onData={getAuth}
+      />
+      <SelectOption
+        datas={[
+          {label: 'Disable 2FA', value: 'false'},
+          {label: 'Enable 2FA', value: 'true'},
+        ]}
+        onData={getAuth}
+      />
       <TouchableOpacity style={styles.button} onPress={() => CreateAccount()}>
         <Text style={styles.buttonText}>Create</Text>
       </TouchableOpacity>

@@ -4,12 +4,21 @@ import {
   View,
   Text,
   Animated,
+  ScrollView,
+  Dimensions,
 } from 'react-native';
 import Orientation from 'react-native-orientation-locker';
 import SignUpForm from '../../base/sign_up_form/SignUpForm';
 
 Orientation.lockToPortrait();
-const SignUpPage: React.FC = () => {
+const screenWidth = Dimensions.get('screen').width;
+const screenheight = Dimensions.get('screen').height;
+
+interface SignUpPageProps {
+  navigation: any;
+}
+
+const SignUpPage: React.FC<SignUpPageProps> = ({navigation}) => {
   const animatedValue = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -39,14 +48,16 @@ const SignUpPage: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.avatarContainer}>
-        <Animated.Image
-          style={[styles.avatar, {transform: [{scale}], opacity}]}
-          source={require('./signup.png')}
-        />
-        <Text style={styles.title}>Sign Up</Text>
-      </View>
-      <SignUpForm />
+      <ScrollView contentContainerStyle={styles.scrollview}>
+        <View style={styles.avatarContainer}>
+          <Animated.Image
+            style={[styles.avatar, {transform: [{scale}], opacity}]}
+            source={require('./signup.png')}
+          />
+          <Text style={styles.title}>Sign Up</Text>
+        </View>
+        <SignUpForm />
+      </ScrollView>
     </View>
   );
 };
@@ -58,6 +69,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#2d2c38',
+  },
+  scrollview: {
+    flexGrow: 1,
+    width: screenWidth,
+    height: screenheight * 1.03,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   title: {

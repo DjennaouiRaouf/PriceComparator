@@ -2,7 +2,10 @@ import React, {useState} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity, Alert} from 'react-native';
 import Input from '../input/Input';
 
-const LoginForm: React.FC = ({}) => {
+interface LoginFormProps {
+  onPress: () => void;
+}
+const LoginForm: React.FC<LoginFormProps> = ({onPress}) => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const getUsername = (username: string) => {
@@ -14,6 +17,7 @@ const LoginForm: React.FC = ({}) => {
   const login = () => {
     Alert.alert('display', `${username + ' ' + password}`);
   };
+
   return (
     <View style={styles.form}>
       <Input
@@ -30,7 +34,7 @@ const LoginForm: React.FC = ({}) => {
       <TouchableOpacity style={styles.button} onPress={() => login()}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.link} onPress={() => login()}>
+      <TouchableOpacity style={styles.link} onPress={onPress}>
         <Text style={styles.buttonText}>Sign-Up !</Text>
       </TouchableOpacity>
     </View>

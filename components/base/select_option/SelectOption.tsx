@@ -1,12 +1,16 @@
 import React, {useState} from 'react';
-import {TextInput, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
+interface data {
+  label: string;
+  value: string;
+}
 interface SelectOptionProps {
-  options: string[];
+  datas: data[];
   onData: (data: string) => void;
 }
 
-const SelectOption: React.FC<SelectOptionProps> = ({options,onData}) => {
+const SelectOption: React.FC<SelectOptionProps> = ({datas, onData}) => {
   const [option, setOption] = useState('');
 
   const handleValueChange = (option: string) => {
@@ -14,12 +18,13 @@ const SelectOption: React.FC<SelectOptionProps> = ({options,onData}) => {
     onData(option);
   };
   return (
-    <Picker style={styles.picker} onValueChange={handleValueChange}>
-        {
-
-        }
-      <Picker.Item label="Enable 2FA auth" value="true" />
-      <Picker.Item label="Disable 2FA auth" value="false" />
+    <Picker
+      style={styles.picker}
+      onValueChange={handleValueChange}
+      selectedValue={option}>
+      {datas.map((item, index) => (
+        <Picker.Item key={index} label={item.label} value={item.value} />
+      ))}
     </Picker>
   );
 };
